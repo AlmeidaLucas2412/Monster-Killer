@@ -13,26 +13,26 @@ const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL'
 const LOG_EVENT_GAME_OVER = 'GAME_OVER'
 
 
-function getMaxLifeValues(){
+function getMaxLifeValues() {
   const enteredValue = prompt('Max life for you and the monster.', '100')
 
-const parsedValue = parseInt(enteredValue)
-if (isNaN(parsedValue) || parsedValue <= 0) {
-  throw {message: 'Invalid user input, not a number'}
-}
-return parsedValue
+  const parsedValue = parseInt(enteredValue)
+  if (isNaN(parsedValue) || parsedValue <= 0) {
+    throw { message: 'Invalid user input, not a number' }
+  }
+  return parsedValue
 }
 
-let chosenMaxLife;
+let chosenMaxLife
 
 try {
-  chosenMaxLife = getMaxLifeValues();
+  chosenMaxLife = getMaxLifeValues()
 } catch (error) {
   console.log(error)
   chosenMaxLife = 100
   alert('You entered something wrong, default value of 100 was used')
 } finally {
-  
+
 }
 
 
@@ -58,57 +58,17 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
       logEntry.target = 'MONSTER'
       break
     case LOG_EVENT_PLAYER_STRONG_ATTACK:
-      logEntry.target= 'MONSTER'       
+      logEntry.target = 'MONSTER'
       break
     case LOG_EVENT_MONSTER_ATTACK:
-      logEntry.target= 'PLAYER'
+      logEntry.target = 'PLAYER'
       break
     case LOG_EVENT_PLAYER_HEAL:
-      logEntry.target= 'PLAYER'
+      logEntry.target = 'PLAYER'
       break
     default:
       logEntry = {}
   }
-  /*if (ev === LOG_EVENT_PLAYER_ATTACK) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: 'MONSTER',
-      finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
-    }
-  } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: 'MONSTER',
-      finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
-    }
-  } else if (ev === LOG_EVENT_MONSTER_ATTACK) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: 'PLAYER',
-      finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
-    }
-  } else if (ev === LOG_EVENT_PLAYER_HEAL) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: 'PLAYER',
-      finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
-    }
-  } else if (ev === LOG_EVENT_GAME_OVER) {
-    logEntry = {
-      event: ev,
-      value: val,
-      finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
-    }
-  }*/
   battleLog.push(logEntry)
 }
 
@@ -187,31 +147,6 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  for (let i = 0; i < 3; i++) {
-    console.log('------------')
-  }
-  let j = 0
-  outerWhile: do {
-    console.log('Outer', j)
-    innerFor: for (let k = 0; k < 5; k++){
-      if (k === 3) {
-        break outerWhile
-      }
-      console.log('Inner', k)
-    }
-    j++
-  } while (j < 3)
-
-  /*
-   for (let i = 0; i < battleLog.length; i++) {
-     console.log(battleLog[i])
-   } */
-
-  /*for (const logEntry of battleLog) {
-    console.log(logEntry)
-  } exemplo de for of que "cria uma nova variável" a cada iteração (retornaria igual o for acima mas sem acesso ao índice) */
-
-
   let i = 0
   for (const logEntry of battleLog) {
     if (!lastLoggedEntry && lastLoggedEntry !== 0 || lastLoggedEntry < i) {
@@ -223,9 +158,8 @@ function printLogHandler() {
       break
     }
     i++
-  } 
+  }
 
-  //console.log(battleLog)
 }
 
 attackBtn.addEventListener('click', attackHandler)
